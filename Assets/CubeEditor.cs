@@ -9,14 +9,9 @@ public class CubeEditor : MonoBehaviour
     [Range(1f, 20f)]
     [SerializeField] private float gridSize = 10f;
 
-    TextMesh labelText;
+    private TextMesh textMesh;
 
-    void Start()
-    {
-        labelText = GetComponentInChildren<TextMesh>();    
-    }
-
-    void Update() 
+    void Update()
 	{
         Vector3 snapPos;
         snapPos.x = Mathf.RoundToInt(transform.position.x / gridSize) * gridSize;
@@ -25,6 +20,11 @@ public class CubeEditor : MonoBehaviour
 
         transform.position = snapPos;
 
-        labelText.text = snapPos.x / gridSize + "," + snapPos.z / gridSize;
+        string labelText = snapPos.x / gridSize + "," + snapPos.z / gridSize;
+
+        textMesh = GetComponentInChildren<TextMesh>();
+        textMesh.text = labelText;
+
+        gameObject.name = "Block " + labelText;
     }
 }
