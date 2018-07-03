@@ -4,20 +4,26 @@ using UnityEngine;
 
 public class EnemyMover : MonoBehaviour 
 {
-    [SerializeField] private List<Block> path;
+    [SerializeField] private List<Waypoint> path;
 
 
 	// Use this for initialization
-	void Start() 
-	{
-		foreach (Block block in path)
+	void Start()
+    {
+        StartCoroutine(FollowPath());
+    }
+
+    private IEnumerator FollowPath()
+    {
+        foreach (Waypoint waypoint in path)
         {
-            Debug.Log(block.gameObject.name);
+            transform.position = waypoint.transform.position;
+            yield return new WaitForSeconds(1f);
         }
-	}
-	
-	// Update is called once per frame
-	void Update() 
+    }
+
+    // Update is called once per frame
+    void Update() 
 	{
 		
 	}
