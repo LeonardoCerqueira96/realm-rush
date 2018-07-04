@@ -6,10 +6,17 @@ public class EnemyMover : MonoBehaviour
 {
     [SerializeField] private List<Waypoint> path;
 
+    private Pathfinder pathfinder;
 
-	// Use this for initialization
-	void Start()
+    void Awake()
     {
+        pathfinder = FindObjectOfType<Pathfinder>();   
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+        path = pathfinder.GetPath();
         StartCoroutine(FollowPath());
     }
 
