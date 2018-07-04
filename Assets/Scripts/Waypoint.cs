@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Waypoint : MonoBehaviour
 {
-    [HideInInspector] public Waypoint exploredFrom;
+    public Waypoint exploredFrom;
 
     private const int gridSize = 10;
 
