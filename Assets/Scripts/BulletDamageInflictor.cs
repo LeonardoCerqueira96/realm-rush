@@ -9,7 +9,6 @@ public class BulletDamageInflictor : MonoBehaviour {
     void Start()
     {
         tower = GetComponentInParent<Tower>();
-        Debug.Log(tower);
     }
 
     private void OnParticleCollision(GameObject other)

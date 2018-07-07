@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Waypoint : MonoBehaviour
 {
+    [SerializeField] private Tower towerPrefab;
+
     public Waypoint exploredFrom;
+    public bool isPlaceable = true;
 
     private const int gridSize = 10;
 
@@ -26,5 +29,17 @@ public class Waypoint : MonoBehaviour
     {
         MeshRenderer topMeshRenderer = transform.Find("Top").GetComponent<MeshRenderer>();
         topMeshRenderer.material.color = color;
+    }
+
+    void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(0) && isPlaceable)
+        {
+            Transform towersParent = GameObject.Find("Towers").transform;
+            GameObject newTower = Instantiate(towerPrefab.gameObject, transform.position, Quaternion.identity);
+            newTower.transform.parent = towersParent;
+
+            isPlaceable = false;
+        }
     }
 }

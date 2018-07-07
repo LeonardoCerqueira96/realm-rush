@@ -84,10 +84,12 @@ public class Pathfinder : MonoBehaviour
     {
         Waypoint currentNode = endPoint;
         path.Add(currentNode);
+        currentNode.isPlaceable = false;
         while (currentNode != startPoint)
         {
             currentNode = currentNode.exploredFrom;
             path.Add(currentNode);
+            currentNode.isPlaceable = false;
         }
 
         path.Reverse();
