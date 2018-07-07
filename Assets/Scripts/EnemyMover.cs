@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class EnemyMover : MonoBehaviour 
 {
-    [SerializeField] private List<Waypoint> path;
+    [SerializeField] private float moveSpeed = 10f;
 
     private Pathfinder pathfinder;
+
+    private Transform pointA, pointB;
+    private Vector3 movementVector;
+    private float distanceToMove;
+
+    private int pathProgress = 0;
+
+    private List<Waypoint> path;
 
     void Awake()
     {
@@ -17,7 +25,22 @@ public class EnemyMover : MonoBehaviour
     void Start()
     {
         path = pathfinder.GetPath();
-        StartCoroutine(FollowPath());
+
+        SetWaypoints();
+    }
+
+    private void SetWaypoints()
+    {
+        if (pathProgress == path.Count - 1)
+        {
+            return;
+        }
+
+        pointA = path[pathProgress].transform;
+        pointB = path[++pathProgress].transform;
+
+        movementVector = (pointB.position - pointA.position).normalized;
+        distanceToMove = Vector3.Distance(pointA.position, pointB.position);
     }
 
     private IEnumerator FollowPath()
@@ -30,8 +53,27 @@ public class EnemyMover : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() 
+    void FixedUpdate() 
 	{
-		
+        HandleMovement();
 	}
+
+    private void HandleMovement()
+    {
+        if (distanceToMove <= 0)
+        {
+            SetWaypoints();
+        }
+
+        MoveEnemy();
+    }
+
+    private void MoveEnemy()
+    {
+        float distanceThisFrame = moveSpeed * Time.deltaTime;
+        distanceThisFrame = Mathf.Clamp(distanceThisFrame, 0f, distanceToMove);
+
+        transform.Translate(movementVector * distanceThisFrame);
+        distanceToMove -= distanceThisFrame;
+    }
 }

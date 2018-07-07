@@ -9,6 +9,7 @@ public class Tower : MonoBehaviour
 
     [SerializeField] private float damageTreshhold = 2f;
     [SerializeField] private float distanceTreshhold = 40f;
+    [SerializeField] private float maxTurnSpeed = 2 * Mathf.PI;
 
     private ParticleSystem.EmissionModule particleEmission;
 
@@ -27,7 +28,10 @@ public class Tower : MonoBehaviour
         Transform bestTarget = GetClosestEnemy();
         if (bestTarget && Vector3.Distance(transform.position, bestTarget.position) < distanceTreshhold)
         {
-            transform.LookAt(bestTarget.position + targetOffset);
+            Quaternion targetRotation = Quaternion.LookRotation((bestTarget.position + targetOffset) -
+                                        objectToPan.transform.position);
+
+            objectToPan.transform.rotation = Quaternion.Slerp(objectToPan.rotation, targetRotation, maxTurnSpeed * Time.deltaTime);
             particleEmission.enabled = true;
         }
         else

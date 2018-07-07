@@ -116,7 +116,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1902329333975908}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19.74712, y: -32.465996, z: 17.806133}
+  m_LocalPosition: {x: -19.74712, y: 27.4, z: 17.806133}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4876386177228306}
@@ -261,9 +261,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToPan: {fileID: 4876386177228306}
-  targetOffset: {x: 0, y: -2, z: 0}
+  targetOffset: {x: 0, y: 3, z: 0}
   damageTreshhold: 2
   distanceTreshhold: 30
+  maxTurnSpeed: 6.28
 --- !u!114 &114693101891810964
 MonoBehaviour:
   m_ObjectHideFlags: 1
