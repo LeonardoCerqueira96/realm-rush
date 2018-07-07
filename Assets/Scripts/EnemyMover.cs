@@ -11,10 +11,11 @@ public class EnemyMover : MonoBehaviour
     private Transform pointA, pointB;
     private Vector3 movementVector;
     private float distanceToMove;
-
     private int pathProgress = 0;
-
     private List<Waypoint> path;
+
+    private PlayerHealth adjacentBase;
+    private bool enemyReachedGoal = false;
 
     void Awake()
     {
@@ -33,6 +34,11 @@ public class EnemyMover : MonoBehaviour
     {
         if (pathProgress == path.Count - 1)
         {
+            if (!enemyReachedGoal)
+            {
+                enemyReachedGoal = true;
+                SelfDestruct();
+            }
             return;
         }
 
@@ -75,5 +81,19 @@ public class EnemyMover : MonoBehaviour
 
         transform.Translate(movementVector * distanceThisFrame);
         distanceToMove -= distanceThisFrame;
+    }
+
+    private void SelfDestruct()
+    {
+        adjacentBase.HitBase();
+        GetComponent<EnemyHealthController>().Explode();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<PlayerHealth>())
+        {
+            adjacentBase = other.gameObject.GetComponent<PlayerHealth>();
+        }
     }
 }

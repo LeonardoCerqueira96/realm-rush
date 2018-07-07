@@ -30,16 +30,21 @@ public class Tower : MonoBehaviour
         Transform bestTarget = GetClosestEnemy();
         if (bestTarget && Vector3.Distance(transform.position, bestTarget.position) < distanceTreshhold)
         {
-            Quaternion targetRotation = Quaternion.LookRotation((bestTarget.position + targetOffset) -
-                                        objectToPan.transform.position);
-
-            objectToPan.transform.rotation = Quaternion.Slerp(objectToPan.rotation, targetRotation, maxTurnSpeed * Time.deltaTime);
+            CalculateRotation(bestTarget);
             particleEmission.enabled = true;
         }
         else
         {
             particleEmission.enabled = false;
         }
+    }
+
+    private void CalculateRotation(Transform bestTarget)
+    {
+        Quaternion targetRotation = Quaternion.LookRotation((bestTarget.position + targetOffset) -
+                                                objectToPan.transform.position);
+
+        objectToPan.transform.rotation = Quaternion.Slerp(objectToPan.rotation, targetRotation, maxTurnSpeed * Time.deltaTime);
     }
 
     private void UpdateEnemyList()

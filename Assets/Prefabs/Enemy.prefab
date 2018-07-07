@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4911299111177570}
   - component: {fileID: 114330119489738752}
   - component: {fileID: 114518189880145374}
+  - component: {fileID: 54678309939549010}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -72,7 +73,6 @@ GameObject:
   - component: {fileID: 4398681978869116}
   - component: {fileID: 33216520622683684}
   - component: {fileID: 23835711375061276}
-  - component: {fileID: 54894762507906730}
   - component: {fileID: 64169579087705562}
   m_Layer: 0
   m_Name: Body
@@ -187,7 +187,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1242167036118394}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -27.8}
+  m_LocalPosition: {x: 164.57385, y: -10, z: -26.070091}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4398681978869116}
@@ -240,12 +240,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1367079734420136}
   m_Mesh: {fileID: 4300000, guid: 042c32b34794f584aa882ba5397f2c19, type: 3}
---- !u!54 &54894762507906730
+--- !u!54 &54678309939549010
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1367079734420136}
+  m_GameObject: {fileID: 1242167036118394}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -292,9 +292,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c7f07d1e0e39904d9650672fb66bc7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 20
   deathParticles: {fileID: 1087143402542772, guid: 29f1edde7020728419d4539c1c1dffe4,
     type: 2}
+  explodeParticles: {fileID: 1349927924924822, guid: 237f05a5fc791d842b93748c1de1a458,
+    type: 2}
+  hitClip: {fileID: 8300000, guid: 5b9c9aca676e4a84aa1aa782bd1305d5, type: 3}
+  deathClip: {fileID: 8300000, guid: 3c7fa991553dd9849a35893e9468d6d7, type: 3}
   health: 0
 --- !u!198 &198208793282392288
 ParticleSystem:

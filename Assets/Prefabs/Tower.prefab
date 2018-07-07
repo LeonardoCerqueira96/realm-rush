@@ -260,6 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64b18863d725274ea496e3943fef808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  basePlace: {fileID: 0}
   objectToPan: {fileID: 4876386177228306}
   targetOffset: {x: 0, y: 3, z: 0}
   damageTreshhold: 2
@@ -345,7 +346,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
