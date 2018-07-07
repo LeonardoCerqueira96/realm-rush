@@ -10,6 +10,8 @@ public class Pathfinder : MonoBehaviour
     private Queue<Waypoint> nodesQueue = new Queue<Waypoint>();
     private List<Waypoint> knownNodes = new List<Waypoint>();
 
+    private List<Waypoint> path = new List<Waypoint>();
+
     private Vector2Int[] directions =
     {
         Vector2Int.up,
@@ -19,15 +21,6 @@ public class Pathfinder : MonoBehaviour
     };
 
     [SerializeField] private Waypoint startPoint, endPoint;
-
-    // Use this for initialization
-    void Start()
-    {
-        LoadBlocks();
-        ColorStartAndEnd();
-        BreadthFirstSearch();
-        //ExploreNeighbours();
-    }
 
     private void LoadBlocks()
     {
@@ -87,10 +80,8 @@ public class Pathfinder : MonoBehaviour
         }
     }
 
-    public List<Waypoint> GetPath()
+    private void RecoverPath()
     {
-        List<Waypoint> path = new List<Waypoint>();
-
         Waypoint currentNode = endPoint;
         path.Add(currentNode);
         while (currentNode != startPoint)
@@ -100,13 +91,19 @@ public class Pathfinder : MonoBehaviour
         }
 
         path.Reverse();
+    }
+
+    public List<Waypoint> GetPath()
+    {
+        if (path.Count == 0)
+        {
+            LoadBlocks();
+            ColorStartAndEnd();
+            BreadthFirstSearch();
+            RecoverPath();
+        }
 
         return path;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
