@@ -538,7 +538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea22f38ae815114abe57427037fbe02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerLimit: 10
+  towerLimit: 3
   towerPrefab: {fileID: 114432863026400044, guid: 8cd12cdefa8d89249b559817dedeb8f3,
     type: 2}
 --- !u!1001 &97795333

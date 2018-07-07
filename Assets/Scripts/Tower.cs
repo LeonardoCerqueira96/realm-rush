@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
+    public Waypoint basePlace;
+
     [SerializeField] private Transform objectToPan;
     [SerializeField] private Vector3 targetOffset = Vector3.zero;
 

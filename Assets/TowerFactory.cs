@@ -7,22 +7,43 @@ public class TowerFactory : MonoBehaviour
     [SerializeField] private int towerLimit = 5;
     [SerializeField] private Tower towerPrefab;
 
-    private int numberOfTowers = 0;
+    private Queue<Tower> towerRingBuffer = new Queue<Tower>();
 
     public void PlaceTower(Waypoint waypoint)
     {
-        if (numberOfTowers < towerLimit)
+        if (towerRingBuffer.Count < towerLimit)
         {
-            Transform towersParent = GameObject.Find("Towers").transform;
-            GameObject newTower = Instantiate(towerPrefab.gameObject, waypoint.transform.position, Quaternion.identity);
-            newTower.transform.parent = towersParent;
-            numberOfTowers++;
-
-            waypoint.isPlaceable = false;
+            CreateTower(waypoint);
         }
         else
         {
-            Debug.Log("You can't place anymore towers");
+            MoveExistingTower(waypoint);
         }
+
+        waypoint.isPlaceable = false;
+    }
+
+    private void MoveExistingTower(Waypoint waypoint)
+    {
+        Tower movingTower = towerRingBuffer.Dequeue();
+
+        movingTower.basePlace.isPlaceable = true;
+
+        movingTower.transform.position = waypoint.transform.position;
+        movingTower.basePlace = waypoint;
+
+        towerRingBuffer.Enqueue(movingTower);
+    }
+
+    private void CreateTower(Waypoint waypoint)
+    {
+        Transform towersParent = GameObject.Find("Towers").transform;
+        Tower newTower = Instantiate(towerPrefab.gameObject, waypoint.transform.position, 
+                            Quaternion.identity).GetComponent<Tower>();
+
+        newTower.transform.parent = towersParent;
+        newTower.basePlace = waypoint;
+
+        towerRingBuffer.Enqueue(newTower);
     }
 }
